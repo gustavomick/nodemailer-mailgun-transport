@@ -36,14 +36,23 @@ var nodemailerMailgun = nodemailer.createTransport(mg(auth));
 nodemailerMailgun.sendMail({
   from: 'myemail@example.com',
   to: 'recipient@domain.com', // An array if you have multiple recipients.
-  cc:'second@domain.com',
-  bcc:'secretagent@company.gov',
+  cc: 'second@domain.com',
+  bcc: 'secretagent@company.gov',
   subject: 'Hey you, awesome!',
-  'h:Reply-To': 'reply2this@company.com',
-  //You can use "html:" to send HTML email content. It's magic!
+  // You can use "html:" to send HTML email content. It's magic!
   html: '<b>Wow Big powerful letters</b>',
-  //You can use "text:" to send plain-text content. It's oldschool!
-  text: 'Mailgun rocks, pow pow!'
+  // You can use "text:" to send plain-text content. It's oldschool!
+  text: 'Mailgun rocks, pow pow!',
+  
+  // Optional
+  replyTo: 'reply2this@company.com',
+  testmode: false,
+  tracking: true,
+  trackingClicks: true,
+  trackingOpens: true,
+  tag: ["September newsletter", "newsletter"],
+  dkim: false,
+  requireTls: false
 }, function (err, info) {
   if (err) {
     console.log('Error: ' + err);
@@ -57,6 +66,5 @@ nodemailerMailgun.sendMail({
 **[1]** Quickly install dependencies
 ```bash
 npm install nodemailer
-npm install git+https://github.com/orliesaurus/nodemailer-mailgun-transport.git
+npm install git+https://github.com/molinto/nodemailer-mailgun-transport.git
 ```
-

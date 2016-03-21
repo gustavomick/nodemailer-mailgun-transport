@@ -47,11 +47,53 @@ MailgunTransport.prototype.send = function send(mail, callback) {
         text       : mailData.text,
         html       : mailData.html,
         attachment : mailData.attachment,
-        'h:Reply-To': mailData['headers']['Reply-To']
+        inline     : mailData.inline
     };
 
+    // BCC
     if (mailData.bcc) {
         options.bcc = mailData.bcc;
+    }
+
+    // Reply to
+    if (mailData.replyTo) {
+        options.h['Reply-To'] = mailData.replyTo;
+    }
+
+    // Test mode (still charged for api calls)
+    if (mailData.testmode) {
+        options.o.testmode = true;
+    }
+
+    // Tracking
+    if (mailData.tracking) {
+        options.o.tracking = true;
+    }
+
+    // Tracking clicks
+    if (mailData.trackingClicks) {
+        options.o['tracking-clicks'] = true;
+    }
+
+    // Tracking opens
+    if (mailData.trackingOpens) {
+        options.o['tracking-opens'] = true;
+    }
+
+    // Tags (maximum 3)
+    if (mailData.tag) {
+        options.o.tag = mailData.tag;
+    }
+
+
+    // DKIM
+    if (mailData.dkim) {
+        options.o.dkim = true;
+    }
+
+    // Require TLS
+    if (mailData.requireTls) {
+        options.o['require-tls'] = true;
     }
 
     this.mailgun.messages().send(options, callback);
