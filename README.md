@@ -66,5 +66,5 @@ nodemailerMailgun.sendMail({
 **[1]** Quickly install dependencies
 ```bash
 npm install nodemailer
-npm install git+https://github.com/molinto/nodemailer-mailgun-transport.git
+npm install git+https://github.com/molinto/nodemailer-mailgun-transport.git --save
 ```

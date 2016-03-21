@@ -85,7 +85,6 @@ MailgunTransport.prototype.send = function send(mail, callback) {
         options.o.tag = mailData.tag;
     }
 
-
     // DKIM
     if (mailData.dkim) {
         options.o.dkim = true;

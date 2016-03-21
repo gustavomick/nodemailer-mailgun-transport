@@ -19,6 +19,12 @@
       "web": "http://mailgun.com"
     }
   ],
+  "contributors": [
+    {
+      "name" : "Sharry Stowell",
+      "email" : "sharry@molinto.com"
+    }
+  ],
   "bugs": {
     "web": "https://github.com/orliesaurus/nodemailer-mailgun-transport/issues"
   },
