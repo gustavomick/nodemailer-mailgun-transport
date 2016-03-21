@@ -34,7 +34,8 @@ var auth = {
 var nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 nodemailerMailgun.sendMail({
-  from: 'myemail@example.com',
+  from: 'myemail@example.com', 
+  // OR from: { name: "Firstname Lastname", address: "myemail@example" }
   to: 'recipient@domain.com', // An array if you have multiple recipients.
   cc: 'second@domain.com',
   bcc: 'secretagent@company.gov',

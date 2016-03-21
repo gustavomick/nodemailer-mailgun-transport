@@ -42,13 +42,21 @@ MailgunTransport.prototype.send = function send(mail, callback) {
     options = {
         type       : mailData.type,
         to         : mailData.to,
-        from       : mailData.from,
         subject    : mailData.subject,
         text       : mailData.text,
         html       : mailData.html,
         attachment : mailData.attachment,
-        inline     : mailData.inline
+        inline     : mailData.inline,
+        h: {},
+        o: {}
     };
+
+    if (typeof mailData.from === "object") {
+        // 'From Name <from@example.com>'
+        options.from =  "\'" + mailData.from.name + "&lt;" + mailData.from.address + "&gt;\'";
+    } else {
+        options.from = mailData.from;
+    }
 
     // BCC
     if (mailData.bcc) {
