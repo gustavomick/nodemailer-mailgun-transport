@@ -53,7 +53,7 @@ MailgunTransport.prototype.send = function send(mail, callback) {
 
     if (typeof mailData.from === "object") {
         // 'From Name <from@example.com>'
-        options.from =  "\'" + mailData.from.name + "<" + mailData.from.address + ">\'";
+        options.from = '"' + mailData.from.name + '" <' + mailData.from.address + '>';
     } else {
         options.from = mailData.from;
     }
