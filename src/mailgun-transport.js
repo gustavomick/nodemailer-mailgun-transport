@@ -111,6 +111,6 @@ MailgunTransport.prototype.send = function send(mail, callback) {
     if (mailData.requireTls) {
         options.o['require-tls'] = true;
     }
-
+    console.log(options);
     this.mailgun.messages().send(options, callback);
 };
