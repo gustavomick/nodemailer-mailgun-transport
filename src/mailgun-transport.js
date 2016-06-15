@@ -23,7 +23,6 @@ function MailgunTransport(options) {
 MailgunTransport.prototype.send = function send(mail, callback) {
     var mailData, a, b, aa, i, options;
     mailData = mail.data;
-    console.log(mailData);
     // convert nodemailer attachments to mailgun-js attachements
     if (mailData.attachments) {
         aa = [];
@@ -112,6 +111,6 @@ MailgunTransport.prototype.send = function send(mail, callback) {
     if (mailData.requireTls) {
         options.o['require-tls'] = true;
     }
-    console.log(options);
+
     this.mailgun.messages().send(options, callback);
 };
