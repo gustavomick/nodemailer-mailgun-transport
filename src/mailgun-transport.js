@@ -47,9 +47,18 @@ MailgunTransport.prototype.send = function send(mail, callback) {
         html       : mailData.html,
         attachment : mailData.attachment,
         inline     : mailData.inline,
-        h: mailData.headers || {},
-        o: mailData.o || {}
+        o: {}
     };
+    
+    if (mailData.messageId) {
+        options['h:Message-Id'] = mailData.messageId;
+    }
+
+    if (mailData.headers) {
+        for (var header in mailData.headers) {
+            options['h:' + header] = mailData.headers[header];
+        }
+    }
 
     if (typeof mailData.from === "object") {
         // 'From Name <from@example.com>'
@@ -65,7 +74,7 @@ MailgunTransport.prototype.send = function send(mail, callback) {
 
     // Reply to
     if (mailData.replyTo) {
-        options.h['Reply-To'] = mailData.replyTo;
+        options['h:Reply-To'] = mailData.replyTo;
     }
 
     // Test mode (still charged for api calls)
