@@ -48,9 +48,12 @@ MailgunTransport.prototype.send = function send(mail, callback) {
         html       : mailData.html,
         attachment : mailData.attachment,
         inline     : mailData.inline,
-        h: mailData.headers || {},
-        o: mailData.o || {}
+        o: {}
     };
+    
+    if (mailData.messageId) {
+        options['h:Message-Id'] = mailData.messageId;
+    }
 
     if (mailData.headers) {
         for (var header in mailData.headers) {
@@ -72,9 +75,7 @@ MailgunTransport.prototype.send = function send(mail, callback) {
 
     // Reply to
     if (mailData.replyTo) {
-        console.log("Adding reply headers", mailData.replyTo);
         options['h:Reply-To'] = mailData.replyTo;
-        options.h['Reply-To'] = mailData.replyTo;
     }
 
     // Test mode (still charged for api calls)
