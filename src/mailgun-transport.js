@@ -66,6 +66,8 @@ MailgunTransport.prototype.send = function send(mail, callback) {
 
     // Reply to
     if (mailData.replyTo) {
+        console.log("Adding reply headers", mailData.replyTo);
+        options['h:Reply-To'] = mailData.replyTo;
         options.h['Reply-To'] = mailData.replyTo;
     }
 
