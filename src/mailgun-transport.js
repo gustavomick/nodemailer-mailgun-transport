@@ -52,6 +52,12 @@ MailgunTransport.prototype.send = function send(mail, callback) {
         o: mailData.o || {}
     };
 
+    if (mailData.headers) {
+        for (var header in mailData.headers) {
+            options['h:' + header] = mailData.headers[header];
+        }
+    }
+
     if (typeof mailData.from === "object") {
         // 'From Name <from@example.com>'
         options.from = '"' + mailData.from.name + '" <' + mailData.from.address + '>';
