@@ -53,7 +53,10 @@ nodemailerMailgun.sendMail({
   trackingOpens: true,
   tag: ["September newsletter", "newsletter"],
   dkim: false,
-  requireTls: false
+  requireTls: false,
+  vars: [
+    'sharry', 'github', 9, { barry: 10 }, true
+  ]
 }, function (err, info) {
   if (err) {
     console.log('Error: ' + err);
