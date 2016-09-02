@@ -8,6 +8,20 @@ module.exports = function (options) {
     return new MailgunTransport(options);
 };
 
+function prepareCustomVars(options, data) {
+    if (Array.isArray(data)) {
+        for (var key in data) {
+            if ((typeof data[key] === 'object')) {
+                options['v:my-custom-data-' + key] = JSON.stringify(data[key]);
+            }
+            else {
+                options['v:my-custom-data-' + key] = data[key];
+            }
+        }
+    }
+    return options;
+}
+
 function MailgunTransport(options) {
     this.options = options || {};
     this.name = 'Mailgun';
@@ -65,6 +79,11 @@ MailgunTransport.prototype.send = function send(mail, callback) {
         options.from = '"' + mailData.from.name + '" <' + mailData.from.address + '>';
     } else {
         options.from = mailData.from;
+    }
+    
+    // Custom fields
+    if (mailData.vars) {
+        prepareCustomVars(options, mailData.vars);
     }
 
     // BCC
