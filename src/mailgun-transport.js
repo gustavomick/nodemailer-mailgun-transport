@@ -12,13 +12,24 @@ function prepareCustomVars(options, data) {
     if (Array.isArray(data)) {
         for (var key in data) {
             if ((typeof data[key] === 'object')) {
-                options['v:my-custom-data-' + key] = JSON.stringify(data[key]);
-            }
-            else {
-                options['v:my-custom-data-' + key] = data[key];
+                for (var p in data[key]) {
+                    if (data[key].hasOwnProperty(p)) {
+                        options['v:' + p] = JSON.stringify(data[key]);
+                    }
+                }
+            } else {
+                options['v:' + data[key]] = data[key];
             }
         }
     }
+    return options;
+}
+
+function prepareTags(options, data) {
+    if (Array.isArray(data)) {
+        options['o:tag'] = data
+    }
+
     return options;
 }
 
@@ -118,7 +129,8 @@ MailgunTransport.prototype.send = function send(mail, callback) {
 
     // Tags (maximum 3)
     if (mailData.tag) {
-        options.o.tag = mailData.tag;
+        prepareTags(options, mailData.tag);
+        options.o['tag'] = mailData.tag2;
     }
 
     // DKIM
