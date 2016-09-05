@@ -130,7 +130,6 @@ MailgunTransport.prototype.send = function send(mail, callback) {
     // Tags (maximum 3)
     if (mailData.tag) {
         prepareTags(options, mailData.tag);
-        //options.o['tag'] = mailData.tag2;
     }
 
     // DKIM
